@@ -1,0 +1,32 @@
+{
+  "version": "1.0",
+  "description": "Default safety policy for Digit Seatbelt",
+  "rules": [
+    {
+      "id": "harmful_content_keywords",
+      "type": "keyword_match",
+      "keywords": ["bomb", "weapon", "explosive", "attack", "kill"],
+      "action": "flag",
+      "reason": "Request contains keywords associated with potential harm"
+    },
+    {
+      "id": "jailbreak_attempt",
+      "type": "pattern_match",
+      "patterns": [
+        "ignore.*instruction",
+        "bypass.*filter",
+        "pretend.*you.*are",
+        "act.*as.*if"
+      ],
+      "action": "flag",
+      "reason": "Request may be attempting to bypass safety measures"
+    },
+    {
+      "id": "excessive_length",
+      "type": "length_check",
+      "max_length": 10000,
+      "action": "flag",
+      "reason": "Request exceeds maximum length threshold"
+    }
+  ]
+}
